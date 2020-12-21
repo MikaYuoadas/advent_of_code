@@ -34,14 +34,15 @@ def get_ingredients(foods: List[Food]) -> Tuple[Set[str], Dict[str, str]]:
     changes = True
     while changes:
         changes = False
-        guessed = set(chain(*(a for i, a in contained.items() if len(a) == 1)))
+        guessed = set(chain.from_iterable(a for i, a in contained.items()
+                                          if len(a) == 1))
         for i, a in contained.items():
             if len(a) != 1:
                 contained[i] = a - guessed
                 changes = True
 
-    safe_ingredients = ingredients - set(chain(*contained.values()))
-    return safe_ingredients, {i: a.pop() for i, a in contained.items()}
+    safe = ingredients - set(chain.from_iterable(contained.values()))
+    return safe, {i: a.pop() for i, a in contained.items()}
 
 
 def main(filename: str) -> None:
