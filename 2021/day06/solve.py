@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 from argparse import ArgumentParser
-from typing import Iterator
-
 from collections import Counter
+from typing import Iterator
 
 
 def parse(filename: str) -> Counter:
